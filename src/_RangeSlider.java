@@ -3,11 +3,11 @@ public interface _RangeSlider {
 	
 	int getMinRange();
 	
-	int setMinRange();
+	void setMinRange(int minRange);
 	
 	int getMaxRange();
 	
-	int setMaxRange();
+	void setMaxRange(int maxRange);
 	
 	int getValue();
 	
@@ -15,12 +15,11 @@ public interface _RangeSlider {
 	
 	int getMin();
 	
-	int setMin();
+	void setMin(int min);
 	
 	int getMax();
 	
-	int setMax();
-	
+	void setMax(int max);
 	
 
 }
