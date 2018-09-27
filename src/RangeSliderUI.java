@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
@@ -18,13 +19,20 @@ public class RangeSliderUI extends BasicSliderUI {
 	private RangeSlider slider;
 	private enum Etats {IDLE, CLIC_PROCHE_GAUCHE, CLIC_PROCHE_DROIT, DRAG_GAUCHE, DRAG_DROIT};
 	private Etats etat;
+	private JLabel labels;
 
-	public RangeSliderUI(RangeSlider slider) {
+	/**
+	 * RangeSliderUI constructeur
+	 * @param slider le slider
+	 * @param labels les labels à evoluer en même temps que le slider
+	 */
+	public RangeSliderUI(RangeSlider slider, JLabel labels) {
 		super(slider);
 		this.curseur_gauche = new Rectangle(0, 0,10,20);
 		this.curseur_droit = new Rectangle(slider.getMax(),0,10,20);
 		this.slider = slider;
 		this.etat = Etats.IDLE;
+		this.labels = labels;
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -91,7 +99,7 @@ public class RangeSliderUI extends BasicSliderUI {
 					//on vérifie que l'on peut déplacer le curseur a cet endroit (pas en dehors de la fenetre et on ne chevauche pas l'autre curseur) avant d'affecter la range a notre RangeSlider.
 					if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) < slider.getMaxRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) >= slider.getMin()) {
 						slider.setMinRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
-						Test.slider_values.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
+						labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 						slider.repaint();	
 					}
 				//c'est l'autre curseur qui était plus près.		
@@ -100,7 +108,7 @@ public class RangeSliderUI extends BasicSliderUI {
 					//on vérifie que l'on peut déplacer le curseur a cet endroit (pas en dehors de la fenetre et on ne chevauche pas l'autre curseur) avant d'affecter la range a notre RangeSlider.
 					if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) > slider.getMinRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) <= slider.getMax()) {
 						slider.setMaxRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
-						Test.slider_values.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
+						labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 						slider.repaint();
 					}
 
@@ -110,7 +118,7 @@ public class RangeSliderUI extends BasicSliderUI {
 				//on vérifie que l'on peut déplacer le curseur a cet endroit (pas en dehors de la fenetre et on ne chevauche pas l'autre curseur) avant d'affecter la range a notre RangeSlider.
 				if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) < slider.getMaxRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) >= slider.getMin()) {
 					slider.setMinRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
-					Test.slider_values.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
+					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 					slider.repaint();	
 				}
 				break;
@@ -118,7 +126,7 @@ public class RangeSliderUI extends BasicSliderUI {
 				//on vérifie que l'on peut déplacer le curseur a cet endroit (pas en dehors de la fenetre et on ne chevauche pas l'autre curseur) avant d'affecter la range a notre RangeSlider.
 				if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) > slider.getMinRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) <= slider.getMax()) {
 					slider.setMaxRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
-					Test.slider_values.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
+					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 					slider.repaint();
 				}
 				break;
@@ -133,7 +141,7 @@ public class RangeSliderUI extends BasicSliderUI {
 				//on vérifie que l'on peut déplacer le curseur a cet endroit (pas en dehors de la fenetre et on ne chevauche pas l'autre curseur) avant d'affecter la range a notre RangeSlider.
 				if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) < slider.getMaxRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) >= slider.getMin()) {
 					slider.setMinRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
-					Test.slider_values.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
+					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 					slider.repaint();	
 				}
 				break;
@@ -143,7 +151,7 @@ public class RangeSliderUI extends BasicSliderUI {
 				//on vérifie que l'on peut déplacer le curseur a cet endroit (pas en dehors de la fenetre et on ne chevauche pas l'autre curseur) avant d'affecter la range a notre RangeSlider.
 				if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) > slider.getMinRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) <= slider.getMax()) {
 					slider.setMaxRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
-					Test.slider_values.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
+					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 					slider.repaint();
 				}
 				break;
@@ -153,7 +161,7 @@ public class RangeSliderUI extends BasicSliderUI {
 				//on vérifie que l'on peut déplacer le curseur a cet endroit (pas en dehors de la fenetre et on ne chevauche pas l'autre curseur) avant d'affecter la range a notre RangeSlider.
 				if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) < slider.getMaxRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) >= slider.getMin()) {
 					slider.setMinRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
-					Test.slider_values.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
+					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 					slider.repaint();	
 				}
 				break;
@@ -163,7 +171,7 @@ public class RangeSliderUI extends BasicSliderUI {
 				//on vérifie que l'on peut déplacer le curseur a cet endroit (pas en dehors de la fenetre et on ne chevauche pas l'autre curseur) avant d'affecter la range a notre RangeSlider.
 				if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) > slider.getMinRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) <= slider.getMax()) {
 					slider.setMaxRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
-					Test.slider_values.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
+					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 					slider.repaint();
 				}
 				break;

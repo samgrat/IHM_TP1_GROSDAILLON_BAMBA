@@ -6,26 +6,35 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicSliderUI;
 
 public class Test {
-	public static RangeSlider s = new RangeSlider(-200, -50);
-	public static JLabel min_max = new JLabel("min : " + s.getMin() + " - max : " + s.getMax(), SwingConstants.CENTER);
-	public static JLabel slider_values = new JLabel("min range : " + s.getMinRange() + " - max range : " + s.getMaxRange(), SwingConstants.CENTER);
-	
-	// Notre liste de home aleatoires
-	public static ArrayList<Home> listeMaisons = new ArrayList<Home>();
 	// Nombre de maisons devant être initilisées
 	public static final int M = 10;
-	// Quelques bornes pour la génération aleatoire
+	// Quelques bornes
 	public static final float X_MAX = 100;
 	public static final float Y_MAX = 100;
 	public static final int PIECES_MIN = 1;
 	public static final int PIECES_MAX = 10;
 	public static final int VALEUR_MIN = 10000;
-	public static final int VALEUR_MAX = 1000000;
+	public static final int VALEUR_MAX = 1000000;	
+
+	// Notre liste de home aleatoires
+	public static ArrayList<Home> listeMaisons = new ArrayList<Home>();
+	
+	public static RangeSlider piecesSlider = new RangeSlider(PIECES_MIN, PIECES_MAX);
+	public static RangeSlider valeurSlider = new RangeSlider(VALEUR_MIN, VALEUR_MAX);
+	
+	public static JLabel pieces_min_max = new JLabel("min : " + piecesSlider.getMin() + " - max : " + piecesSlider.getMax(), SwingConstants.CENTER);
+	public static JLabel pieces_slider_values = new JLabel("min range : " + piecesSlider.getMinRange() + " - max range : " + piecesSlider.getMaxRange(), SwingConstants.CENTER);
+	public static JLabel valeur_min_max = new JLabel("min : " + valeurSlider.getMin() + " - max : " + valeurSlider.getMax(), SwingConstants.CENTER);
+	public static JLabel valeur_slider_values = new JLabel("min range : " + valeurSlider.getMinRange() + " - max range : " + valeurSlider.getMaxRange(), SwingConstants.CENTER);
 	
 	public static void main(String[] args){
 		SwingUtilities.invokeLater(new Runnable(){
 			
 			public void run(){
+				
+				JFrame app = new JFrame();
+				BorderLayout all = new BorderLayout();
+				app.setLayout(all);
 				
 				// On commence par remplir notre liste avec des maisons aleatoires
 				for(int i = 0; i < M; i++) {
@@ -33,22 +42,38 @@ public class Test {
 				}
 				
 				//On crée une nouvelle instance de notre JDialog				
-				s.setUI(new RangeSliderUI(s));
+				piecesSlider.setUI(new RangeSliderUI(piecesSlider, pieces_slider_values));
+				valeurSlider.setUI(new RangeSliderUI(valeurSlider, valeur_slider_values));		
 				
-				JFrame app = new JFrame();
+				JPanel pieces_labels = new JPanel(new BorderLayout());
+				pieces_labels.add(pieces_min_max,BorderLayout.NORTH);	
+				pieces_labels.add(pieces_slider_values,BorderLayout.SOUTH);
+				
+				JPanel valeur_labels = new JPanel(new BorderLayout());
+				valeur_labels.add(valeur_min_max,BorderLayout.NORTH);	
+				valeur_labels.add(valeur_slider_values,BorderLayout.SOUTH);
+				
+				// On creee des JPanel a part pour nos RangeSlider
+				JPanel slider = new JPanel(new BorderLayout());
+				slider.add(pieces_labels, BorderLayout.NORTH);
+				slider.add(piecesSlider, BorderLayout.CENTER);
+				
+				JPanel slider2 = new JPanel(new BorderLayout());
+				slider2.add(valeur_labels, BorderLayout.NORTH);
+				slider2.add(valeurSlider, BorderLayout.CENTER);
+				
+				// Puis un autre JPanel les englobant
+				JPanel controls = new JPanel(new BorderLayout());
+				controls.add(slider, BorderLayout.NORTH);
+				controls.add(slider2, BorderLayout.CENTER);
+				
+				// Ensuite on cree notre carte TODO
+				// Map map = new Map(new BorderLayout(), listeMaisons);
 				
 				
-				JPanel labels = new JPanel(new BorderLayout());
-				labels.add(min_max,BorderLayout.NORTH);	
-				labels.add(slider_values,BorderLayout.SOUTH);
-				
-				BorderLayout all = new BorderLayout();
-				app.setLayout(all);
-				app.add(labels, BorderLayout.NORTH);
-				app.add(s,BorderLayout.CENTER);	
-				
-				// J'ai commenté cette seconde addition de s
-				//app.add(s);
+				// On organise nos composants
+				app.add(controls,BorderLayout.EAST);
+				//app.add(map.affiche(),BorderLayout.WEST);
 				
 				app.pack(); //la taille de la fenetre est définie en fonction des composants à l'intérieur.
 				app.setVisible(true);

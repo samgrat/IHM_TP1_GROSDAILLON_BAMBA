@@ -2,7 +2,7 @@ import java.awt.geom.Point2D;
 
 public class Home {
 	
-	private Point2D.Float position;
+	private Point2D.Double position;
 	private int pieces;
 	private int valeur;
 	
@@ -13,9 +13,9 @@ public class Home {
 	 * @param pieces nombre de pieces
 	 * @param valeur valeur du bien
 	 */
-	public Home(float pX, float pY, int pieces, int valeur) {
+	public Home(double pX, double pY, int pieces, int valeur) {
 		
-		this.position = new Point2D.Float(pX, pY);
+		this.position = new Point2D.Double(pX, pY);
 		this.pieces = pieces;
 		this.valeur = valeur;
 		
@@ -25,7 +25,7 @@ public class Home {
 		return position.getX();
 	}
 	
-	public void setX(float x) {
+	public void setX(double x) {
 		position.setLocation(x, position.getY());
 	}
 	
@@ -33,7 +33,7 @@ public class Home {
 		return position.getY();
 	}
 	
-	public void setY(float y) {
+	public void setY(double y) {
 		position.setLocation(position.getX(), y);
 	}
 	
