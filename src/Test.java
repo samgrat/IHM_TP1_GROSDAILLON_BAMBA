@@ -7,10 +7,10 @@ import javax.swing.plaf.basic.BasicSliderUI;
 
 public class Test {
 	// Nombre de maisons devant être initilisées
-	public static final int M = 10;
+	public static final int M = 100;
 	// Quelques bornes
-	public static final float X_MAX = 100;
-	public static final float Y_MAX = 100;
+	public static final float X_MAX = 400;
+	public static final float Y_MAX = 400;
 	public static final int PIECES_MIN = 1;
 	public static final int PIECES_MAX = 10;
 	public static final int VALEUR_MIN = 10000;
@@ -35,15 +35,17 @@ public class Test {
 				JFrame app = new JFrame();
 				BorderLayout all = new BorderLayout();
 				app.setLayout(all);
+				app.setSize(700, 450);
 				
 				// On commence par remplir notre liste avec des maisons aleatoires
 				for(int i = 0; i < M; i++) {
 					ajouteMaison(listeMaisons);
 				}
-				
+				Map map = new Map(listeMaisons, piecesSlider, valeurSlider);
+
 				//On crée une nouvelle instance de notre JDialog				
-				piecesSlider.setUI(new RangeSliderUI(piecesSlider, pieces_slider_values));
-				valeurSlider.setUI(new RangeSliderUI(valeurSlider, valeur_slider_values));		
+				piecesSlider.setUI(new RangeSliderUI(piecesSlider, pieces_slider_values, map));
+				valeurSlider.setUI(new RangeSliderUI(valeurSlider, valeur_slider_values, map));		
 				
 				JPanel pieces_labels = new JPanel(new BorderLayout());
 				pieces_labels.add(pieces_min_max,BorderLayout.NORTH);	
@@ -56,26 +58,24 @@ public class Test {
 				// On creee des JPanel a part pour nos RangeSlider
 				JPanel slider = new JPanel(new BorderLayout());
 				slider.add(pieces_labels, BorderLayout.NORTH);
-				slider.add(piecesSlider, BorderLayout.CENTER);
+				slider.add(piecesSlider, BorderLayout.SOUTH);
 				
 				JPanel slider2 = new JPanel(new BorderLayout());
 				slider2.add(valeur_labels, BorderLayout.NORTH);
-				slider2.add(valeurSlider, BorderLayout.CENTER);
+				slider2.add(valeurSlider, BorderLayout.SOUTH);
 				
 				// Puis un autre JPanel les englobant
 				JPanel controls = new JPanel(new BorderLayout());
 				controls.add(slider, BorderLayout.NORTH);
-				controls.add(slider2, BorderLayout.CENTER);
+				controls.add(slider2, BorderLayout.SOUTH);
 				
 				// Ensuite on cree notre carte TODO
-				Map map = new Map(new BorderLayout(), listeMaisons);
 				
 				
 				// On organise nos composants
 				app.add(controls,BorderLayout.EAST);
-				app.add(map,BorderLayout.WEST);
+				app.add(map,BorderLayout.CENTER);
 				
-				app.pack(); //la taille de la fenetre est définie en fonction des composants à l'intérieur.
 				app.setVisible(true);
 				
 

@@ -20,19 +20,21 @@ public class RangeSliderUI extends BasicSliderUI {
 	private enum Etats {IDLE, CLIC_PROCHE_GAUCHE, CLIC_PROCHE_DROIT, DRAG_GAUCHE, DRAG_DROIT};
 	private Etats etat;
 	private JLabel labels;
+	private Map map;
 
 	/**
 	 * RangeSliderUI constructeur
 	 * @param slider le slider
 	 * @param labels les labels à evoluer en même temps que le slider
 	 */
-	public RangeSliderUI(RangeSlider slider, JLabel labels) {
+	public RangeSliderUI(RangeSlider slider, JLabel labels, Map map) {
 		super(slider);
 		this.curseur_gauche = new Rectangle(0, 0,10,20);
 		this.curseur_droit = new Rectangle(slider.getMax(),0,10,20);
 		this.slider = slider;
 		this.etat = Etats.IDLE;
 		this.labels = labels;
+		this.map = map;
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -100,7 +102,8 @@ public class RangeSliderUI extends BasicSliderUI {
 					if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) < slider.getMaxRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) >= slider.getMin()) {
 						slider.setMinRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
 						labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
-						slider.repaint();	
+						slider.repaint();
+						map.repaint();
 					}
 				//c'est l'autre curseur qui était plus près.		
 				} else {
@@ -110,6 +113,7 @@ public class RangeSliderUI extends BasicSliderUI {
 						slider.setMaxRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
 						labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 						slider.repaint();
+						map.repaint();
 					}
 
 				}
@@ -119,7 +123,8 @@ public class RangeSliderUI extends BasicSliderUI {
 				if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) < slider.getMaxRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) >= slider.getMin()) {
 					slider.setMinRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
 					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
-					slider.repaint();	
+					slider.repaint();
+					map.repaint();
 				}
 				break;
 			case CLIC_PROCHE_DROIT:
@@ -128,6 +133,7 @@ public class RangeSliderUI extends BasicSliderUI {
 					slider.setMaxRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
 					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 					slider.repaint();
+					map.repaint();
 				}
 				break;
 			}
@@ -142,7 +148,8 @@ public class RangeSliderUI extends BasicSliderUI {
 				if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) < slider.getMaxRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) >= slider.getMin()) {
 					slider.setMinRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
 					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
-					slider.repaint();	
+					slider.repaint();
+					map.repaint();
 				}
 				break;
 				
@@ -153,6 +160,7 @@ public class RangeSliderUI extends BasicSliderUI {
 					slider.setMaxRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
 					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 					slider.repaint();
+					map.repaint();
 				}
 				break;
 				
@@ -162,7 +170,8 @@ public class RangeSliderUI extends BasicSliderUI {
 				if (((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) < slider.getMaxRange() && ((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin()) >= slider.getMin()) {
 					slider.setMinRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
 					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
-					slider.repaint();	
+					slider.repaint();
+					map.repaint();
 				}
 				break;
 				
@@ -173,6 +182,7 @@ public class RangeSliderUI extends BasicSliderUI {
 					slider.setMaxRange((e.getX()*(slider.getMax()-slider.getMin()))/tickRect.width + slider.getMin());
 					labels.setText("min range : " + slider.getMinRange() + " - max range : " + slider.getMaxRange());
 					slider.repaint();
+					map.repaint();
 				}
 				break;
 			}
