@@ -68,12 +68,12 @@ public class Test {
 				controls.add(slider2, BorderLayout.CENTER);
 				
 				// Ensuite on cree notre carte TODO
-				// Map map = new Map(new BorderLayout(), listeMaisons);
+				Map map = new Map(new BorderLayout(), listeMaisons);
 				
 				
 				// On organise nos composants
 				app.add(controls,BorderLayout.EAST);
-				//app.add(map.affiche(),BorderLayout.WEST);
+				app.add(map,BorderLayout.WEST);
 				
 				app.pack(); //la taille de la fenetre est définie en fonction des composants à l'intérieur.
 				app.setVisible(true);
