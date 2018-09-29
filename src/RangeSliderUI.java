@@ -59,8 +59,14 @@ public class RangeSliderUI extends BasicSliderUI {
 		avec valeur, la valeur du curseur (minRange ou maxRange) que nous avons placé dans le champ x des variables curseur_droit et curseur_gauche)
 		min et max les valeurs minimales et maximales de notre RangeSlider (pas les valeurs des curseurs).
 		*/
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(((curseur_gauche.x - slider.getMin())*this.tickRect.width)/(slider.getMax()-slider.getMin()), this.curseur_gauche.y, this.curseur_gauche.width, this.curseur_gauche.height);
 		g.fillRect(((curseur_droit.x - slider.getMin())*this.tickRect.width)/(slider.getMax()-slider.getMin()), this.curseur_droit.y, this.curseur_droit.width, this.curseur_droit.height);
+	       
+	
+		//dessin du rectangle bleu entre les deux curseurs.
+		g.setColor(Color.cyan);
+		g.fillRect(((curseur_gauche.x - slider.getMin())*this.tickRect.width)/(slider.getMax()-slider.getMin())+10, this.curseur_gauche.y+7, ((curseur_droit.x - slider.getMin())*this.tickRect.width)/(slider.getMax()-slider.getMin())-((curseur_gauche.x - slider.getMin())*this.tickRect.width)/(slider.getMax()-slider.getMin())-10, this.curseur_gauche.height/3);
 	       
 	}
 	

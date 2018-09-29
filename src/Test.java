@@ -45,7 +45,8 @@ public class Test {
 				JFrame app = new JFrame();
 				BorderLayout all = new BorderLayout();
 				app.setLayout(all);
-				app.setSize(700, 450);
+				app.setSize(760, 428);
+				app.setResizable(false);
 				
 				// On commence par remplir notre liste avec des maisons aleatoires
 				for(int i = 0; i < M; i++) {
@@ -55,7 +56,7 @@ public class Test {
 				// Ensuite on cree notre carte
 				Map map = new Map(listeMaisons, piecesSlider, valeurSlider, rayonASlider, rayonBSlider);
 
-				//On crée une nouvelle instance de notre JDialog				
+				//On définit les UI de nos RangeSliders et de nos sliders pour les distances des points a et b.				
 				piecesSlider.setUI(new RangeSliderUI(piecesSlider, pieces_slider_values, map));
 				valeurSlider.setUI(new RangeSliderUI(valeurSlider, valeur_slider_values, map));		
 				rayonASlider.setUI(new BasicSliderUI(rayonASlider));
@@ -115,10 +116,17 @@ public class Test {
 				// Puis un autre JPanel les englobant
 				JPanel controls = new JPanel(new BorderLayout());
 				controls.add(sliders, BorderLayout.NORTH);
-				controls.add(basicSliders, BorderLayout.CENTER);
+				controls.add(basicSliders, BorderLayout.SOUTH);
+				
+				JLabel realisation = new JLabel("Réalisé par Samuel BAMBA et Hugo GROS-DAILLON");
+				
+				//JPanel pour afficher l'ensemble des sliders au nord.
+				JPanel elements = new JPanel(new BorderLayout());
+				elements.add(controls, BorderLayout.NORTH);
+				elements.add(realisation, BorderLayout.SOUTH);
 				
 				// On organise nos composants
-				app.add(controls,BorderLayout.EAST);
+				app.add(elements,BorderLayout.EAST);
 				app.add(map,BorderLayout.CENTER);
 				
 				app.setVisible(true);

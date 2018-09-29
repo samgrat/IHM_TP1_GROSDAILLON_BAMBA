@@ -99,8 +99,7 @@ public class Map extends JPanel {
 					&& maison.getPieces() <= slider_pieces.getMaxRange()
 					&& maison.getValeur() >= slider_prix.getMinRange()
 					&& maison.getValeur() <= slider_prix.getMaxRange()
-					&& distanceA  <= slider_rayonA.getValue()
-					|| distanceB  <= slider_rayonB.getValue()) {
+					&& (distanceA  <= slider_rayonA.getValue() || distanceB  <= slider_rayonB.getValue())) {
 				
 				e = new Ellipse2D.Double((maison).getX(), (maison).getY(), 1, 1);
 				g.setColor(COULEUR_POINTS);
